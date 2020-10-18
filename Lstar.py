@@ -13,7 +13,7 @@ def run_lstar(teacher,time_limit):
     learner = inferrer.Learner(alphabet=set(teacher.alphabet), oracle=inferrer.oracle.PassiveOracle(teacher.starting_example_custom[0],
                                                                                            teacher.starting_example_custom[1])
                             ,teacher=teacher
-                           ,algorithm="lstar", time_limit=time_limit, start = start)
+                           ,algorithm="nlstar", time_limit=time_limit, start = start)
 
     dfa = learner.learn_grammar()
 

@@ -80,7 +80,9 @@ class NLSTAR(ActiveLearner):
             hypothesis = self._build_hypothesis()
 
             self._logger.info('Submitting equivalence query.')
-            answer, satisfied = self._oracle.equivalence_query(hypothesis)
+            # answer, satisfied = self._oracle.equivalence_query(hypothesis)
+            _dfa_temp = hypothesis.to_dfa()
+            answer, satisfied = self._teacher.equivalence_query(_dfa_temp)
 
             if satisfied:
                 self._logger.info('Oracle happy with our hypothesis.')
@@ -89,7 +91,8 @@ class NLSTAR(ActiveLearner):
             self._logger.info('Oracle return {} as counterexample.'.format(answer))
             self._use_eq(answer)
 
-        return hypothesis
+        # return hypothesis
+        return hypothesis.to_dfa()
 
     def _use_eq(self, eq: str):
         """
