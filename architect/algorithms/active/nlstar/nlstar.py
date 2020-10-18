@@ -9,6 +9,10 @@ from architect.logger.logger import Logger
 from typing import Set
 from neuralnets import Teacher
 
+from time import clock
+
+class TableTimedOut(Exception):
+    pass
 
 class NLSTAR(ActiveLearner):
     """
@@ -90,6 +94,7 @@ class NLSTAR(ActiveLearner):
 
             self._logger.info('Oracle return {} as counterexample.'.format(answer))
             self._use_eq(answer)
+            self._assert_not_timed_out()
 
         # return hypothesis
         return hypothesis.to_dfa()
